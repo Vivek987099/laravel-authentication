@@ -9,10 +9,10 @@ class LoginController extends Controller
 {
     public function login(Request $req){
         
-        $credentials = [
-            'email'=> $req -> email,
-            'password'=> $req -> password,
-        ];
+        $credentials = $req -> validate([
+            'email'=> 'required | email',
+            'password'=> 'required',
+        ]);
 
         if(Auth::attempt($credentials)){
             return redirect() -> route('dashboard');    
